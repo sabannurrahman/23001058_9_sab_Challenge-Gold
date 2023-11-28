@@ -1,0 +1,1 @@
+var apel ="apel satu";
