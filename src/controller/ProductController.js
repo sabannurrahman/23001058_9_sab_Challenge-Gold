@@ -1,78 +1,63 @@
-const products = [{
-    id: 1,
-    namaProduk: 'baju',
-    jumlah: 2,
-    deskripsi: 'baju pria'
-  },
-  {
-    id: 2,
-    namaProduk: 'celana',
-    jumlah: 3,
-    deskripsi: 'celana pria'
-  },
-  {
-    id: 3,
-    namaProduk: 'sepatu',
-    jumlah: 4,
-    deskripsi: 'sepatu pria'
-  },
-  {
-    id: 4,
-    namaProduk: 'topi',
-    jumlah: 6,
-    deskripsi: 'topi pria'
-  },
-];
+const {User} = require ('../models');
 
-const allProduct = (req, res) =>{
-    const data = products;
-    const result = {
-      status: 'ok',
-      data: data
-    }
-    res.json(result)
+const allUsers = async (req, res) =>{
+  try {
+      const data = await User.findAll()
+      const result = {
+        status: 'ok',
+        data: data
+      }
+      res.json(result)
+  } catch (error) {
+    console.log(error,'<<< error find all users')
+  }
 }
 
-
-const productById = (req, res) =>{
+const usersById = async (req, res) =>{
+   try {
     const { id } = req.params
-    let product
-    for (let i = 0; i < products.length; i++) {
-  
-      if (products[i].id === Number(id)) {
-        product = products[i]
-      }
-  
-    }
-  
-    if (product === undefined) {
-      res.status(404).json({
+    const data = await User.findByPk(id)
+    
+    if (data === null) {
+      return res.status(404).json({
         status: 'failed',
         message: `data dengan id (${id}) tidak ditemukan`
       })
     }
-  
     res.json({
-      status: 'ok',
-      data: product
+      status : 'ok',
+      data : data
     })
+
+   } catch (error) {
+    console.log(error,'<<< error find users by id')
+   }
+    }
   
-}
+const createUsers = async (req, res) =>{
+  
+  try {
+     const {username, password, email, nama, alamat} = req.body
+    const newUser = await User.create({username:username, password:password, email:email, nama:nama, alamat:alamat})
 
-const createProduct = (req, res) =>{
-    const {namaProduk, jumlah, deskripsi} = req.body
+    res.status(201).json({
+      status: 'ok',
+    data : {
+      id : newUser.id,
+      username : newUser.username,
+      password : newUser.password,
+      email : newUser.email,
+      nama : newUser.nama,
+      alamat : newUser.alamat,
+      createdat : newUser.createdat,
+      updatedat : newUser.updatedat
 
-const lastId = products[products.length-1].id
-const newId = lastId+1
-  //menambahkan produk baru
-const newData = {id:newId, namaProduk:namaProduk, jumlah:jumlah, deskripsi:deskripsi} 
-  products.push(newData)
-
-  res.status(201).json({
-    status: 'ok',
-    message: 'data berhasil ditambahkan',
-    data : newData
+    }
   })
+  } catch (error) {
+     console.log(error,'<<< error create users')
+  }
+ 
 }
 
-module.exports = {allProduct, productById, createProduct}
+module.exports = {allUsers, usersById, createUsers}
