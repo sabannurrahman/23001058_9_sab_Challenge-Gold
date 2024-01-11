@@ -1,12 +1,9 @@
 const router = require('express').Router()
-const authRouter = require('./authRouter')
-const userRouter = require('./userRouter')
+const { allUsers } = require('../controller/UserController')
 
 
 
-router.use("/api/v1", authRouter)
-router.use("/api/v1", userRouter)
-
+router.get("/users", allUsers)
 // router.get('/users/:id', usersById )
 // router.post('/users', createUsers )
 // router.patch('/users/:id', editUsers )

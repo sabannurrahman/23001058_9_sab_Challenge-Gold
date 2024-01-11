@@ -9,6 +9,7 @@ module.exports = {
       email: 'sabannurrahman@gmail.com',
       nama: 'saban',
       alamat: 'kota bima',
+      role_ID : 1,
       createdAt: new Date(),
       updatedAt: new Date()
     }]);
