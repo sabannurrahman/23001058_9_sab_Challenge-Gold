@@ -1,11 +1,14 @@
 const router = require('express').Router()
 const authRouter = require('./authRouter')
 const userRouter = require('./userRouter')
-
+const categoryRouter = require('./categoryRouter')
 
 
 router.use("/api/v1", authRouter)
 router.use("/api/v1", userRouter)
+router.use("/api/v1", categoryRouter)
+
+
 
 // router.get('/users/:id', usersById )
 // router.post('/users', createUsers )

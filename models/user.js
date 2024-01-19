@@ -24,15 +24,14 @@ module.exports = (sequelize, DataTypes) => {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique : { args: true, msg:"username sudah digunakan"},
-        isInt: true, 
+        unique: { args: true, msg: "username sudah digunakan" },
+        isInt: true,
         validate: {
           notNull: { msg: "Username belum di isi" },
-          notEmpty: { msg: "Username tidak boleh kosong" },
           len: {
             args: [6, 30],
             msg: "Username min 6 karakter dan max 30 karakter",
-          }
+          },
         },
       },
       password: {
@@ -40,24 +39,21 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
         validate: {
           notNull: { msg: "Password belum di isi" },
-          notEmpty: { msg: "Password tidak boleh kosong" },
           len: { args: [6, 255], msg: "Password min 6 karakter" },
         },
       },
-      nama: {
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
           notNull: { msg: "Nama belum di isi" },
-          notEmpty: { msg: "Nama tidak boleh kosong" },
         },
       },
-      alamat: {
+      address: {
         type: DataTypes.TEXT,
         allowNull: false,
         validate: {
           notNull: { msg: "Alamat belum di isi" },
-          notEmpty: { msg: "Alamat tidak boleh kosong" },
         },
       },
       role_ID: {
@@ -70,7 +66,6 @@ module.exports = (sequelize, DataTypes) => {
         isEmail: true,
         validate: {
           notNull: { msg: "Email belum di isi" },
-          notEmpty: { msg: "Email tidak boleh kosong" },
           isEmail: { msg: "Format email salah" },
         },
       },
@@ -84,7 +79,7 @@ module.exports = (sequelize, DataTypes) => {
   User.beforeCreate((user) => {
     user.password = bcrypt.hashSync(
       user.password,
-      bcrypt.genSaltSync(10),
+      bcrypt.genSaltSync(10), 
       null
     );
   });

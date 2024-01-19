@@ -9,10 +9,10 @@ module.exports = {
         primaryKey: true,
         unique: true,
         name:'role_ID',
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER(2)
       },
       name: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING (20)
       }
    
     });

@@ -9,7 +9,7 @@ module.exports = {
         primaryKey: true,
         unique: true,
         name:'user_ID',
-        type: Sequelize.INTEGER(7)
+        type: Sequelize.INTEGER(8)
       },
       username: {
         allowNull: false,
@@ -18,19 +18,23 @@ module.exports = {
       },
       password: {
         allowNull: false,
-        type: Sequelize.STRING(150)
-      },
-      email: {
-        unique: true,
         type: Sequelize.STRING(100)
       },
-      nama: {
-        type: Sequelize.STRING(80)
+      email: {
+        allowNull: false,
+        unique: true,
+        type: Sequelize.STRING(50)
       },
-      alamat: {
-        type: Sequelize.STRING
+      name: {
+        allowNull: false,
+        type: Sequelize.STRING(100)
+      },
+      address: {
+        allowNull: false,
+        type: Sequelize.STRING(150)
       },
       role_ID: {
+        allowNull: false,
         references: {
           model: 'Roles', // Nama tabel yang akan di-referensikan
           key: 'role_ID',      // Kolom pada tabel yang akan di-referensikan
@@ -40,11 +44,9 @@ module.exports = {
         type: Sequelize.INTEGER(2)
       },
       createdAt: {
-        allowNull: false,
         type: Sequelize.DATE
       },
       updatedAt: {
-        allowNull: false,
         type: Sequelize.DATE
       }
     });
