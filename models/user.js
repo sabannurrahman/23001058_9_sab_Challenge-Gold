@@ -9,28 +9,30 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      // many to one (table user and table role)
+      User.belongsTo(models.Role, {
+        foreignKey : 'role_id'
+      })
     }
   }
   User.init(
     {
-      user_ID: {
+      user_id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         allowNull: false,
-        autoIncrement: true,
-        field: "user_ID",
+        autoIncrement: true
       },
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: { args: true, msg: "username sudah digunakan" },
+        unique: { args: true, msg: "username is already" },
         isInt: true,
         validate: {
-          notNull: { msg: "Username belum di isi" },
+          notNull: { msg: "Username is empty" },
           len: {
             args: [6, 30],
-            msg: "Username min 6 karakter dan max 30 karakter",
+            msg: "username must be at least 6 characters",
           },
         },
       },
@@ -38,25 +40,32 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notNull: { msg: "Password belum di isi" },
-          len: { args: [6, 255], msg: "Password min 6 karakter" },
+          notNull: { msg: "Password is empty" },
+          len: { args: [6, 255], msg: "Password must be at least 6 characters" },
         },
       },
       name: {
         type: DataTypes.STRING,
         allowNull: false,
         validate: {
-          notNull: { msg: "Nama belum di isi" },
+          notNull: { msg: "Name is empty" },
         },
       },
       address: {
         type: DataTypes.TEXT,
         allowNull: false,
         validate: {
-          notNull: { msg: "Alamat belum di isi" },
+          notNull: { msg: "address is empty" },
         },
       },
-      role_ID: {
+      phone_number: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: { msg: "Phone Number is empty" },
+        },
+      },
+      role_id: {
         type: DataTypes.INTEGER,
       },
       email: {
@@ -65,8 +74,8 @@ module.exports = (sequelize, DataTypes) => {
         unique: true,
         isEmail: true,
         validate: {
-          notNull: { msg: "Email belum di isi" },
-          isEmail: { msg: "Format email salah" },
+          notNull: { msg: "Email is empty" },
+          isEmail: { msg: "Incorrect email format" },
         },
       },
     },

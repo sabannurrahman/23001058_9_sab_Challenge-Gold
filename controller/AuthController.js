@@ -1,47 +1,45 @@
 const { User } = require("../models");
 const bcrypt = require('bcrypt');
-const { successResponse, errorResponse, serverErrorResponse } = require('../helper/fornatResponse');
+const {
+  successResponse,
+  errorResponse,
+  notfoundResponse,
+  serverErrorResponse,
+} = require("../helper/fornatResponse");
 
-const createUsers = async (req, res) => {
+// Membuat user baru
+exports.createUsers = async (req, res) => {
   try {
-    const { username, password, passwordMatch, email, name, address, role_ID } = req.body;
-    
+    let { username, password, passwordMatch, email, name, address, phone_number, role_id } = req.body; //mangambil request body postman
+    //cek konfirmasi password
     if(password != passwordMatch){
       return res.status(400).json({ 
         message :"Fail",
         error : ["password not matches"]
     });
   }
-    
-    const newUser = await User.create({
-      username: username,
-      password: password,
-      email: email,
-      name: name,
-      address: address,
-      role_ID : role_ID
-    });
 
-    const data = {
-      id: newUser.user_ID,
-      username: newUser.username,
-      password: newUser.password,
-      email: newUser.email,
-      name: newUser.name,
-      address: newUser.address,
-      role_ID : newUser.role_ID,
-      createdat: newUser.createdat,
-      updatedat: newUser.updatedat,
-    }
-    successResponse(res, data, "User created successfully"); 
+    // Create a new user
+    const newData = await User.create({
+      username, 
+      password,  
+      email, 
+      name, 
+      address, 
+      phone_number,
+      role_id, 
+    });
+    //respon sukses dengan helper
+    successResponse(res, newData, "User created successfully");
   } catch (error) {
     if (error.errors) {
-      errorResponse(res, error.errors.map(err => err.message));
+      errorResponse(
+        res,
+        error.errors.map((err) => err.message) //mengambil error message dari validasi
+      );
     } else {
-      serverErrorResponse(res);
+      serverErrorResponse(res); //server eoer
     }
-    console.log(error, "<<< error create users");
+    console.log(error, "<<< error create user");
   }
 };
-
-module.exports = { createUsers };

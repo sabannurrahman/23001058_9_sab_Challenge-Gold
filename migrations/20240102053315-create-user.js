@@ -3,12 +3,11 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('Users', {
-      user_ID: {
+      user_id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         unique: true,
-        name:'user_ID',
         type: Sequelize.INTEGER(8)
       },
       username: {
@@ -33,11 +32,15 @@ module.exports = {
         allowNull: false,
         type: Sequelize.STRING(150)
       },
-      role_ID: {
+      phone_number: {
+        allowNull: false,
+        type: Sequelize.STRING(15)
+      },
+      role_id: {
         allowNull: false,
         references: {
           model: 'Roles', // Nama tabel yang akan di-referensikan
-          key: 'role_ID',      // Kolom pada tabel yang akan di-referensikan
+          key: 'role_id',      // Kolom pada tabel yang akan di-referensikan
         },
         onUpdate: 'CASCADE',
         onDelete: 'CASCADE',
