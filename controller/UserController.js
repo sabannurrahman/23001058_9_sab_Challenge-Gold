@@ -16,7 +16,8 @@ exports.allUsers = async (req, res) => {
           model:Role,
           attributes : { exclude:["createdAt", "updatedAt", "role_id"]}
         }
-      ]   
+      ]  
+      
     }); //ambil semua data
     successResponse(res, data, "all  data User");
   } catch (error) {
@@ -29,7 +30,16 @@ exports.detailUser = async (req, res) => {
   try {
     // view detail User
     const { id } = req.params;
-    const data = await User.findByPk(id); //mengecek data yang sesuai dengan id request
+    const data = await User.findByPk(id, {
+        include:[
+          {
+            model:Role,
+            attributes : { exclude:["createdAt", "updatedAt", "role_id"]}
+          }
+        ]   
+      }
+      
+      ); //mengecek data yang sesuai dengan id request
     if (data === null) {
       notfoundResponse(res, `data user by id (${id}) is not found`);
     } else {
