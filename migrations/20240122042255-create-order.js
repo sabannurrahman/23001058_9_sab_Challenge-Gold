@@ -10,9 +10,11 @@ module.exports = {
         type: Sequelize.INTEGER(10)
       },
       quantity_order: {
+        //Note: disini seharusnya quantity tidak boleh dibiarkan null. Bisa ditambahkan constraint allowNull: false
         type: Sequelize.INTEGER(10)
       },
       total_order: {
+        //Note: disini seharusnya total belanja tidak boleh dibiarkan null. Bisa ditambahkan constraint allowNull: false
         type: Sequelize.FLOAT(20)
       },
       status: {

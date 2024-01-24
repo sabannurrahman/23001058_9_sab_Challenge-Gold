@@ -21,7 +21,8 @@ exports.allUsers = async (req, res) => {
     }); //ambil semua data
     successResponse(res, data, "all  data User");
   } catch (error) {
-      serverErrorResponse(res);
+    serverErrorResponse(res);
+    //Note: Console.log yg tidak terpakai bisa dihapus saja
     console.log(error, "<<< error read data user");
   }
 };

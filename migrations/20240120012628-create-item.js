@@ -15,9 +15,11 @@ module.exports = {
         type: Sequelize.STRING(50)
       },
       price: {
+        //Note: disini seharusnya harga tidak boleh dibiarkan null. Bisa ditambahkan constraint allowNull: false
         type: Sequelize.FLOAT(20)
       },
       quantity: {
+        //Note: disini seharusnya quantity tidak boleh dibiarkan null. Bisa ditambahkan constraint allowNull: false
         type: Sequelize.INTEGER(10)
       },
       description: {

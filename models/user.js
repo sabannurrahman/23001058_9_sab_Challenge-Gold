@@ -13,7 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       User.hasMany(models.Order, {
         foreignKey : 'user_id'
       })
-
+      //Note: Jika sudah tidak digunakan bisa dihapus saja
       // User.belongsToMany(models.Item,{
       //   through: 'Orders',
       //   // foreignKey: 'userId',
@@ -99,7 +99,8 @@ module.exports = (sequelize, DataTypes) => {
       null
     );
   });
-  User.prototype.CorectPassword = async (reqPassword, passwordDB)=>{
+  User.prototype.CorectPassword = async (reqPassword, passwordDB) => {
+    //Note: Disini tidak perlu async await karena sudah pakai method bcrypt.compareSync
     return await bcrypt.compareSync(reqPassword, passwordDB)
   }
   return User;

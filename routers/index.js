@@ -6,7 +6,7 @@ const itemRouter = require('./itemRouter')
 const orderRouter = require('./orderRouter')
 
 router.use("/api/v1", authRouter)
-router.use("/api/v1", userRouter)
+router.use("/api/v1", userRouter) //Note: Jika semua prefix endpointnya sama, bisa dibuat berbeda saja seperti router.use("/api/v1/users", userRouter)
 router.use("/api/v1", categoryRouter)
 router.use("/api/v1", itemRouter)
 router.use("/api/v1", orderRouter)

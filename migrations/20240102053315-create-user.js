@@ -46,6 +46,7 @@ module.exports = {
         onDelete: 'CASCADE',
         type: Sequelize.INTEGER(2)
       },
+      //Note: Penulisan nama kolom bisa dibuat konsisten. Beberapa kolom menggunakan snake_case tapi kolom dibawah pakai camelCase. Bisa dipilih salah 1 dan dibuat konsisten. Note ini berlaku untuk nama kolom di table lain
       createdAt: {
         type: Sequelize.DATE
       },

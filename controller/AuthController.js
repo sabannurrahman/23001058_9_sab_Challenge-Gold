@@ -44,6 +44,7 @@ exports.createUsers = async (req, res) => {
   }
 };
 
+//Note: Cukup sulit membaca code di function ini karena indentasinya berantakan. Bisa dirapihkan kembali
 exports.loginUsers = async (req, res) => {
   try {
    //validasi jika username dan password belum diisi
