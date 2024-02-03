@@ -43,6 +43,8 @@ create a new user with JSON :
 
 ### Response
 
-> [!TIP] Success (200)
+> [!TIP]
+> Successfull (200).
 
-> [!CAUTION] Error(400)
+> [!CAUTION]
+> Error (400)
